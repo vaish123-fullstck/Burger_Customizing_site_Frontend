@@ -1,0 +1,129 @@
+/* Left Panel Styling: Do Not Change */
+.menu-container {
+  position: sticky;  /* Keep it in place while scrolling */
+  top: 20px;         /* Stick to the top */
+  align-self: flex-start; /* Ensure it doesn't stretch in flex container */
+  max-width: 400px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fef4e8;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #793838;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Categories container styling */
+.menu-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  position:static;
+}
+
+/* Individual category styling */
+.menu-category {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  border-radius: 8px;
+  transition: background-color 0.3s, transform 0.2s;
+  cursor: pointer;
+}
+
+.menu-category:hover {
+  background-color: #ffcc00;
+  transform: scale(1.03);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Category image styling */
+.menu-category-icon {
+  width: 50px; 
+  height: 40px;
+  margin-right: 10px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Category text styling */
+.menu-category span {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  text-align: center;
+}
+
+/* Increase the width of the menu layout */
+.menu-layout {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+  max-width: 1000px; /* Increase width */
+}
+
+/* Increase the width of the right panel */
+.menu-items {
+  flex: 5; /* Make the right panel take more space */
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #fef4e8;
+  width: 100%;
+  min-height: 400px; /* Set a minimum height for consistency */
+}
+
+.menu-categories span {
+  text-align: center;
+}
+
+.menu-item {
+  width: 180px; /* Set a reasonable width */
+  height: 200px; /* Adjust height */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden; /* Prevents any overflow */
+}
+
+.menu-item img {
+  width: 100%; /* Make sure the image scales within the container */
+  max-width: 150px; /* Limit the maximum size of the image */
+  height: auto; /* Maintain aspect ratio */
+  object-fit: contain; /* Ensure the full image is visible */
+  display: block; /* Prevents inline spacing issues */
+  margin: 0 auto; /* Center the image */
+}
+
+/* Ensure 5 items per row */
+.menu-item-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Set 5 items per row */
+  gap: 15px;
+  margin-top: 15px;
+}
+
+/* Ensure menu items fit well */
+.menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.menu-item:hover {
+  background-color: #ffcc00;
+  transform: scale(1.03);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

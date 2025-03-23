@@ -1,0 +1,124 @@
+/* Ensures the layout is aligned properly */
+.product-details {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 20px;
+  max-width: 90vw;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+/* LEFT: Image & Quantity aligned properly */
+.product-image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers image & quantity */
+  flex: 1;
+}
+
+.enlarged-product-image {
+  width: clamp(250px, 35vw, 400px); /* Keeps image size responsive */
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Quantity Controls BELOW image */
+.quantity-control {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.quantity-control button {
+  padding: 10px 15px;
+  font-size: 1.2rem;
+  background-color: #793838;
+  color: white;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.quantity-control button:hover {
+  background-color: #5a2828;
+}
+
+/* RIGHT: Product Info */
+.product-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align text and button to the left */
+  text-align: left;
+  flex: 1;
+}
+
+.product-name {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.product-description {
+  font-size: 16px;
+  color: #555;
+  max-width: 400px;
+  margin-bottom: 15px;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+/* Add to Cart button properly positioned */
+.add-to-cart button {
+  margin-top: 10px;
+  padding: 14px 22px;
+  font-size: 1.2rem;
+  background-color: #ffcc00;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  width: 220px;
+  font-weight: bold;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.add-to-cart button:hover {
+  background-color: #ffb300;
+}
+
+.ingredients-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.ingredient-item {
+  text-align: center;
+  width: 60px;
+}
+
+.ingredient-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+}
+
+.ingredient-name {
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.no-ingredients {
+  text-align: center;
+  margin-top: 10px;
+  color: #888;
+}
