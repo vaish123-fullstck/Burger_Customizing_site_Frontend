@@ -27,9 +27,9 @@ import FrozenFanta from "../assets/beverages/frznfanta.png";
 import ClassicFrozenCoke from "../assets/beverages/classicfzncoke.png";
 
 /* Fish & Chicken */
-import ChickenSandwichImg from "../assets/fishnchicken/deluxecrspybrrgrr.png";
-import FishFilletSandwich from "../assets/fishnchicken/fishfilletsandwhich.png";
-import SpicyCrispyBrrrgrr from "../assets/fishnchicken/spicycrspybrrgrr.png";
+import ChickenSandwichImg from "../assets/FishnChicken/deluxecrspybrrgrr.png";
+import FishFilletSandwich from "../assets/FishnChicken/fishfilletsandwhich.png";
+import SpicyCrispyBrrrgrr from "../assets/FishnChicken/spicycrspybrrgrr.png";
 
 import HotCakesIng from "../assets/ingredients/hotcakes.png";
 import Sausage from "../assets/ingredients/sausagepatty.png";
