@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../styles/BurgerCustomizer.css";
 import { menuCategories } from "../components/menuData.js";
 
-export default function BurgerCustomizer() {
+export default function BurgerCustomizer({ addToCart }) {
   const allIngredients = Array.from(
     new Map(
       Object.values(menuCategories)
@@ -16,15 +16,10 @@ export default function BurgerCustomizer() {
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [ingredientCount, setIngredientCount] = useState({});
 
-  const ingredientPrices = {
-    topbun: 2,
-    bottombun: 2,
-    lettuce: 1,
-    tomato: 1,
-    cheese: 1.5,
-    patty: 3,
-    bacon: 2.5
-  };
+  const ingredientPrices = allIngredients.reduce((acc, ingredient) => {
+  acc[ingredient.name] = ingredient.price || 0;
+  return acc;
+  }, {});
 
   const toggleIngredient = (ingredient) => {
     setSelectedIngredients((prev) => {
@@ -63,6 +58,22 @@ export default function BurgerCustomizer() {
     setIngredientCount({});
   };
 
+  const createCustomName = () => {
+    const important = selectedIngredients.map(i => i.name.toLowerCase());
+
+    const keywords = [];
+
+    if (important.includes("cheese")) keywords.push("Cheesy");
+    if (important.includes("patty")) keywords.push("Double Patty");
+    if (important.includes("bacon")) keywords.push("Bacon Stack");
+    if (important.includes("lettuce")) keywords.push("Lettuce");
+    if (important.includes("tomato")) keywords.push("Tomato Burst");
+
+    if (keywords.length === 0) return "Your Custom Item";
+
+    return `${keywords.join(" ")} Special`;
+  };
+
   return (
     <div className="burger-customizer">
       <div className="ingredients-container">
@@ -82,7 +93,7 @@ export default function BurgerCustomizer() {
       </div>
 
       <div className="burger-preview">
-        <h2>Your Burger</h2>
+        <h2>Your Custom Creation</h2>
         <div className="burger-stack">
           {[...selectedIngredients]
             .sort((a, b) => {
@@ -98,7 +109,9 @@ export default function BurgerCustomizer() {
                   src={ingredient.image}
                   alt={ingredient.name}
                   className={`stacked-ingredient ${
-                    ingredient.name === "topbun" ? "top-bun" : ingredient.name === "bottombun" ? "bottom-bun" : "ingredient"
+                    ingredient.name === "topbun" ? "top-bun" :
+                    ingredient.name === "bottombun" ? "bottom-bun" :
+                    "ingredient"
                   }`}
                   style={{
                     zIndex: ingredient.name === "topbun" ? 100 : selectedIngredients.length - index
@@ -111,7 +124,29 @@ export default function BurgerCustomizer() {
         </div>
 
         <h3>Total Price: ${calculateTotalPrice()}</h3>
-        <button className="add-to-cart-button">Add to Cart</button>
+
+        <button
+          className="add-to-cart-button"
+          onClick={() => {
+            const representativeIngredient = selectedIngredients.find(i => i.image);
+            const customItem = {
+              id: `custom-${Date.now()}`,
+              name: createCustomName(),
+              image: representativeIngredient?.image || "", // Fallback image if no ingredient
+              price: parseFloat(calculateTotalPrice()),
+              category: "custom",
+              ingredients: selectedIngredients.map(i => ({
+                name: i.name,
+                count: ingredientCount[i.name] || 1
+              }))
+            };
+
+            addToCart(customItem);
+            resetBurger();
+          }}
+        >
+          Add to Cart
+        </button>
         <button className="reset-button" onClick={resetBurger}>Reset</button>
       </div>
     </div>

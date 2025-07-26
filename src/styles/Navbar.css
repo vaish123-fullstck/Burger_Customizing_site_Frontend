@@ -1,91 +1,183 @@
+/* --- Desktop Navbar Styles --- */
 .navbar {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    background-color: #ffcc00;
-    padding: 10px 20px;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #ffcc00;
+  padding: 10px 20px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  box-sizing: border-box;
 }
 
 .navbar h1 {
-    margin-right: 20px;
-    font-size: 1.5rem;
+  margin-right: 20px;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 
 .navbar ul {
-    list-style: none;
-    display: flex;
-    gap: 15px;
-    margin-left: 0;
-    padding: 0;
+  list-style: none;
+  display: flex;
+  align-items: center; /* Vertically align items */
+  gap: 15px;
+  margin: 0;
+  padding: 0;
 }
 
 .navbar li {
-    cursor: pointer;
-    padding: 5px 10px;
-    border-radius: 20px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-weight: 500;
 }
 
 .navbar li:hover {
-    background-color: #793838;
-    color: white;
+  background-color: #793838;
+  color: white;
 }
 
+/* This is a specific list item, style it like others */
 .customize-btn {
-    padding: 5px 15px;
-    background-color: #ffcc00;
-    color: black;
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-    border-radius: 20px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+  padding: 5px 15px;
+  background-color: #793838; /* Make it stand out */
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .customize-btn:hover {
-    background-color: #793838;
-    color: white;
+  background-color: #5a2828; /* Darken on hover */
 }
 
 /* Cart Icon Styles */
 .cart-container {
-    position: relative;
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    padding-right: 20px;
+  position: relative;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
 }
 
 .cart-icon img {
-    width: 30px;
-    height: auto;
-    cursor: pointer;
-    transition: transform 0.3s ease;
+  width: 30px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
 .cart-icon:hover img {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 /* Cart Count Badge */
 .cart-count {
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    background-color: brown;
-    color: white;
-    font-size: 12px;
-    font-weight: bold;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    display: flex;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #793838;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #ffcc00;
+}
+
+/* Hamburger Menu (Hidden on Desktop) */
+.hamburger-menu {
+  display: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+/* --- ✅ MOBILE RESPONSIVE STYLES --- */
+
+@media (max-width: 768px) {
+  /* Use Grid for a stable 3-column layout */
+  .navbar {
+    display: grid;
+    grid-template-columns: auto 1fr auto; /* Left, Center, Right */
     align-items: center;
-    justify-content: center;
-    border: 2px solid white;
+  }
+
+  /* Hide the desktop nav links */
+  .navbar ul {
+    display: none; /* Hide the ul by default on mobile */
+    flex-direction: column;
+    position: absolute;
+    top: 100%; /* Position it right below the navbar */
+    left: 0;
+    width: 100%;
+    background-color: #ffcc00;
+    padding: 10px 0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    gap: 0; /* Remove gap for vertical list */
+  }
+
+  /* This class will be toggled with JS to show the menu */
+  .navbar ul.active {
+    display: flex;
+  }
+
+  .navbar li {
+    text-align: center;
+    width: 100%;
+    padding: 15px 0;
+    border-radius: 0;
+  }
+  
+  .customize-btn {
+    width: auto; /* Let it size to content */
+    margin: 10px 20px; /* Add margin for spacing in the dropdown */
+  }
+
+  /* Show and style the hamburger menu icon */
+  .hamburger-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    grid-column: 1 / 2; /* Place in the first column */
+    justify-self: start; /* Align to the left */
+  }
+  
+  .hamburger-menu .bar {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    border-radius: 2px;
+  }
+
+  /* Center the brand name in the middle column */
+  .navbar h1 {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    grid-column: 2 / 3;
+  }
+
+  /* Place the cart in the last column */
+  .cart-container {
+    margin-left: 0;
+    grid-column: 3 / 4;
+    justify-self: end; /* Align to the right */
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar h1 {
+    font-size: 1.2rem;
+  }
 }

@@ -1,0 +1,314 @@
+/*
+  NOTE: If this page is still not wide enough, the problem is likely in your main "App.css" file.
+  In your App.jsx, your CartPage is inside a <div className="content">.
+  You need to find the ".content" style rule in "App.css" and remove any "width" or "max-width" properties from it.
+*/
+
+/* --- Main Layout & Theming --- */
+.cart-page-layout {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  background-color: #fffdf7; /* Your site's light background */
+  align-items: flex-start;
+  
+  /* ✅ EDITED: Force the layout to span the full viewport width, ignoring parent containers */
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  box-sizing: border-box; /* Ensures padding is included in the width calculation */
+}
+
+/* --- Left Column: Shopping Cart Container --- */
+.shopping-cart-container {
+  flex-grow: 1; /* This allows the container to grow and fill available space */
+  background-color: #ffffff;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+}
+
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.shopping-cart-container h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #333;
+}
+
+.price-header {
+  font-size: 0.9rem;
+  color: #6c757d;
+  align-self: flex-end;
+}
+
+.cart-items-list {
+  margin-top: 10px;
+}
+
+/* --- Individual Item Card --- */
+.cart-item-card {
+  display: flex;
+  gap: 1.5rem;
+  padding: 20px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.cart-item-image img {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+}
+
+.cart-item-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-item-details h4 {
+  margin: 0 0 5px 0;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.item-stock-status {
+  font-size: 0.9rem;
+  color: #28a745; /* Green for "Freshly Made" */
+  font-weight: bold;
+  margin: 0;
+}
+
+.cart-item-price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  min-width: 80px;
+  text-align: right;
+}
+
+.cart-item-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.quantity-selector {
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.quantity-selector button {
+  background-color: #793838; /* Your site's red */
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.quantity-selector button:hover {
+  background-color: #5a2828;
+}
+
+.quantity-selector span {
+  padding: 6px 15px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  background-color: #f1f1f1;
+}
+
+.action-divider {
+  color: #ddd;
+}
+
+.action-link {
+  background: none;
+  border: none;
+  color: #793838;
+  cursor: pointer;
+  padding: 0;
+  font-size: 0.9rem;
+}
+
+/* --- RIGHT COLUMN: Sidebar --- */
+.cart-sidebar {
+  width: 320px; /* Gave the sidebar a fixed width */
+  flex-shrink: 0; /* Prevents the sidebar from shrinking */
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* Space between summary and suggestions */
+}
+
+.order-summary-container {
+  background-color: #ffffff;
+  padding: 25px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+}
+
+.subtotal-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.subtotal-price {
+  font-weight: bold;
+}
+
+.proceed-to-buy-btn {
+  background-color: #ffcc00; /* Your site's yellow */
+  border: none;
+  color: #333;
+  width: 100%;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.proceed-to-buy-btn:hover {
+  background-color: #ffb300;
+}
+
+/* --- Suggestions Section --- */
+.suggestions-section {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+}
+
+.suggestions-section h4 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+  color: #333;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.suggestion-item-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.suggestion-item-card:last-child {
+  margin-bottom: 0;
+}
+
+.suggestion-item-card img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.suggestion-item-info {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.suggestion-item-info span {
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.suggestion-item-info button {
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.suggestion-item-info button:hover {
+  background-color: #e0e0e0;
+}
+
+/* --- Empty Cart Message --- */
+.empty-cart-message {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+/* --- ✅ MOBILE RESPONSIVE STYLES --- */
+
+/* For tablets and smaller devices */
+@media (max-width: 992px) {
+  .cart-page-layout {
+    flex-direction: column;
+    width: 100%; /* Use 100% instead of 100vw to respect padding */
+    left: 0;
+    transform: none;
+    padding: 1rem; /* Reduce padding on smaller screens */
+  }
+
+  .cart-sidebar {
+    width: 100%; /* Sidebar takes full width */
+  }
+}
+
+/* For smaller mobile phones */
+@media (max-width: 576px) {
+  .cart-item-card {
+    flex-direction: column; /* Stack item content vertically */
+    align-items: center;
+    text-align: center;
+  }
+
+  .cart-item-details {
+    align-items: center; /* Center the details text */
+  }
+  
+  .cart-item-price {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 1.3rem;
+  }
+
+  .cart-item-actions {
+    margin-top: 15px;
+    justify-content: center; /* Center the action buttons */
+  }
+
+  .shopping-cart-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .cart-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .price-header {
+    margin-top: 5px;
+  }
+}

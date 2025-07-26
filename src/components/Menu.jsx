@@ -1,15 +1,33 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { menuCategories } from "./menuData"; // Import menu data
-import "./Menu.css"; // Import styles
+import { menuCategories } from "./menuData";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./Menu.css";
 
-export default function Menu() {
-  const [selectedCategory, setSelectedCategory] = useState(Object.keys(menuCategories)[0]); // Default to first category
-  const [selectedProduct, setSelectedProduct] = useState(null); // Track selected product
+export default function Menu({ addToCart }) {
+  const [selectedCategory, setSelectedCategory] = useState(Object.keys(menuCategories)[0]);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const handleAddToCart = () => {
+    addToCart(selectedProduct);
+    toast(`${selectedProduct.name} added to cart!`, {
+      position: "bottom-right",
+      autoClose: 1500,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      className: "custom-toast",
+    });
+  };
+
+  const relatedProducts = selectedProduct
+    ? menuCategories[selectedCategory].items.filter((item) => item.name !== selectedProduct.name)
+    : [];
 
   return (
     <div className="menu-layout">
-      {/* Left Panel: Category List */}
+      <ToastContainer />
       <div className="menu-container">
         <h2>Categories</h2>
         <div className="menu-categories">
@@ -19,7 +37,7 @@ export default function Menu() {
               className={`menu-category ${selectedCategory === category ? "active" : ""}`}
               onClick={() => {
                 setSelectedCategory(category);
-                setSelectedProduct(null); // Reset product when switching categories
+                setSelectedProduct(null); // Reset when category changes
               }}
             >
               <img src={menuCategories[category].image} alt={category} className="menu-category-icon" />
@@ -29,39 +47,68 @@ export default function Menu() {
         </div>
       </div>
 
-      {/* Right Panel: Dynamic View */}
       <div className="menu-items">
         {selectedProduct ? (
-          // Product Details View (Corrected Layout)
           <div className="product-details">
-            {/* Left Side: Image & Quantity */}
+            
             <div className="product-image-container">
               <img src={selectedProduct.image} alt={selectedProduct.name} className="enlarged-product-image" />
-
-              {/* Quantity BELOW image */}
               <div className="quantity-control">
-                <button onClick={() => setSelectedProduct({ ...selectedProduct, quantity: Math.max(1, (selectedProduct.quantity || 1) - 1) })}>-</button>
+                <button
+                  onClick={() =>
+                    setSelectedProduct({
+                      ...selectedProduct,
+                      quantity: Math.max(1, (selectedProduct.quantity || 1) - 1),
+                    })
+                  }
+                >
+                  -
+                </button>
                 <span>{selectedProduct.quantity || 1}</span>
-                <button onClick={() => setSelectedProduct({ ...selectedProduct, quantity: (selectedProduct.quantity || 1) + 1 })}>+</button>
+                <button
+                  onClick={() =>
+                    setSelectedProduct({
+                      ...selectedProduct,
+                      quantity: (selectedProduct.quantity || 1) + 1,
+                    })
+                  }
+                >
+                  +
+                </button>
               </div>
             </div>
 
-            {/* Right Side: Product Name & Add to Cart */}
             <div className="product-info">
               <h2 className="product-name">{selectedProduct.name}</h2>
               <p className="product-description">
                 {selectedProduct.description || "No description available."}
               </p>
-              
+              <p className="product-price">Price: {selectedProduct.price}</p>
               <div className="add-to-cart">
-                <button onClick={() => console.log(`${selectedProduct.name} added to cart with quantity ${selectedProduct.quantity || 1}`)}>
-                  Add to Cart
-                </button>
+                <button onClick={handleAddToCart}>Add to Cart</button>
               </div>
             </div>
+
+            {/* ✅ Related products */}
+            {relatedProducts.length > 0 && (
+              <div className="related-products">
+                <h3>Related Items in {selectedCategory}</h3>
+                <div className="menu-item-grid">
+                  {relatedProducts.map((item) => (
+                    <div
+                      key={item.name}
+                      className="menu-item"
+                      onClick={() => setSelectedProduct({ ...item, quantity: 1 })}
+                    >
+                      <h4 className="menu-item-name">{item.name}</h4>
+                      <img src={item.image} alt={item.name} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         ) : (
-          // Category Products Grid View
           <>
             <h2>{selectedCategory}</h2>
             <div className="menu-item-grid">
@@ -69,7 +116,7 @@ export default function Menu() {
                 <div
                   key={item.name}
                   className="menu-item"
-                  onClick={() => setSelectedProduct({ ...item, quantity: 1 })} // Reset quantity when selecting a product
+                  onClick={() => setSelectedProduct({ ...item, quantity: 1 })}
                 >
                   <h3 className="menu-item-name">{item.name}</h3>
                   <img src={item.image} alt={item.name} />

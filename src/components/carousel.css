@@ -14,6 +14,7 @@
   scroll-behavior: smooth; /* Smooth scrolling */
   overflow-x: auto; /* Horizontal scrolling */
   scrollbar-width: none; /* Hide scrollbar for Firefox */
+  padding: 10px; /* Add some padding so shadow is not cut off */
 }
 
 /* Hide Scrollbar for Webkit Browsers */
@@ -32,6 +33,7 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Add a shadow effect */
   transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation for hover effect */
   overflow: hidden; /* Ensure no content overflows the card */
+  flex-shrink: 0; /* Prevent cards from shrinking */
 }
 
 /* Hover Effect on Cards */
@@ -46,4 +48,28 @@
   height: 100%; /* Make the image scale to the card's height */
   object-fit: cover; /* Ensure the image fills the container without distortion */
   border-radius: 10px; /* Match the card's rounded corners */
+}
+
+/* --- ✅ MOBILE RESPONSIVE STYLES --- */
+
+/* For tablets */
+@media (max-width: 768px) {
+  .card {
+    min-width: 400px;
+    height: 250px;
+  }
+}
+
+/* For mobile phones */
+@media (max-width: 480px) {
+  .card {
+    /* ✅ EDITED: Use viewport width to ensure cards fit on screen */
+    width: 85vw; 
+    min-width: 85vw;
+    height: 200px; /* Reduce card height */
+  }
+
+  .carousel {
+    gap: 15px; /* Reduce gap between cards */
+  }
 }

@@ -1,9 +1,21 @@
-/* Left Panel Styling: Do Not Change */
+/* Layout */
+.menu-layout {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+  max-width: 1200px;
+  margin-left: auto; /* Center the layout */
+  margin-right: auto;
+  padding: 0 1rem; /* Add padding for smaller screens */
+}
+
+/* Menu container (Category List) */
 .menu-container {
-  position: sticky;  /* Keep it in place while scrolling */
-  top: 20px;         /* Stick to the top */
-  align-self: flex-start; /* Ensure it doesn't stretch in flex container */
-  max-width: 400px;
+  position: sticky;
+  top: 20px;
+  align-self: flex-start;
+  width: 280px; /* Give it a fixed width on desktop */
+  flex-shrink: 0; /* Prevent it from shrinking */
   padding: 20px;
   border-radius: 10px;
   background-color: #fef4e8;
@@ -17,15 +29,13 @@ h2 {
   font-weight: bold;
 }
 
-/* Categories container styling */
+/* Category styles */
 .menu-categories {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  position:static;
 }
 
-/* Individual category styling */
 .menu-category {
   display: flex;
   align-items: center;
@@ -33,97 +43,173 @@ h2 {
   border: 1px solid #ddd;
   background-color: #fff;
   border-radius: 8px;
-  transition: background-color 0.3s, transform 0.2s;
   cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
-.menu-category:hover {
+.menu-category:hover, .menu-category.active { /* Added active state style */
   background-color: #ffcc00;
   transform: scale(1.03);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Category image styling */
 .menu-category-icon {
-  width: 50px; 
+  width: 50px;
   height: 40px;
   margin-right: 10px;
-  object-fit: cover;
-  display: block;
+  object-fit: contain; /* Use contain to see the whole image */
 }
 
-/* Category text styling */
 .menu-category span {
   font-size: 16px;
   font-weight: 500;
   color: #333;
-  text-align: center;
 }
 
-/* Increase the width of the menu layout */
-.menu-layout {
-  display: flex;
-  gap: 20px;
-  margin-top: 20px;
-  max-width: 1000px; /* Increase width */
-}
-
-/* Increase the width of the right panel */
+/* Right Panel (Menu Items) */
 .menu-items {
-  flex: 5; /* Make the right panel take more space */
+  flex: 1; /* Allow it to grow */
   padding: 20px;
-  border-radius: 8px;
   background-color: #fef4e8;
-  width: 100%;
-  min-height: 400px; /* Set a minimum height for consistency */
+  border-radius: 8px;
+  min-height: 400px;
 }
 
-.menu-categories span {
-  text-align: center;
-}
-
-.menu-item {
-  width: 180px; /* Set a reasonable width */
-  height: 200px; /* Adjust height */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  overflow: hidden; /* Prevents any overflow */
-}
-
-.menu-item img {
-  width: 100%; /* Make sure the image scales within the container */
-  max-width: 150px; /* Limit the maximum size of the image */
-  height: auto; /* Maintain aspect ratio */
-  object-fit: contain; /* Ensure the full image is visible */
-  display: block; /* Prevents inline spacing issues */
-  margin: 0 auto; /* Center the image */
-}
-
-/* Ensure 5 items per row */
+/* Menu grid: 4 columns on desktop */
 .menu-item-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* Set 5 items per row */
+  grid-template-columns: repeat(4, 1fr);
   gap: 15px;
   margin-top: 15px;
 }
 
-/* Ensure menu items fit well */
+/* Menu item card */
 .menu-item {
+  width: 100%;
+  min-height: 240px; /* Uniform height for all cards */
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between; /* Better vertical alignment */
+  text-align: center;
   padding: 15px;
   border: 1px solid #ddd;
   background-color: #f9f9f9;
   border-radius: 8px;
   transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
 }
 
+/* Menu item image */
+.menu-item img {
+  width: 100%;
+  max-width: 150px;
+  height: 120px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+/* Menu item name */
+.menu-item-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #793838;
+  padding: 0 5px;
+  text-align: center;
+  line-height: 1.3;
+  word-break: break-word; /* Allow long names to wrap */
+}
+
+/* Hover effect */
 .menu-item:hover {
   background-color: #ffcc00;
   transform: scale(1.03);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* --- ✅ MOBILE RESPONSIVE STYLES --- */
+
+/* For tablets and smaller devices */
+@media (max-width: 992px) {
+  .menu-item-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 columns for tablets */
+  }
+}
+
+@media (max-width: 768px) {
+  .menu-layout {
+    flex-direction: column;
+    padding: 0 0.5rem; /* Reduce padding */
+  }
+
+  .menu-container {
+    position: relative;
+    top: 0;
+    width: 100%; /* Make category list full-width */
+    max-width: 100%;
+  }
+
+  .menu-item-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for small tablets */
+  }
+}
+
+/* For smaller mobile phones */
+@media (max-width: 480px) {
+    .menu-item-grid {
+        grid-template-columns: repeat(1, 1fr); /* 1 column for phones */
+    }
+
+    .menu-item {
+        min-height: auto; /* Let height be automatic */
+        padding: 10px;
+    }
+
+    .menu-items {
+        padding: 10px;
+    }
+}
+
+
+/* Custom toast (already looks good on mobile, no changes needed) */
+.custom-toast {
+  position: fixed;
+  bottom: 20px; /* Adjusted for better mobile view */
+  right: 20px;
+  left: 20px; /* Center it on small screens */
+  margin: 0 auto;
+  background-color: #793838; /* Rich brown */
+  color: white;
+  padding: 12px 18px;
+  border-radius: 30px; /* Capsule look */
+  font-size: 0.9rem;
+  max-width: 320px;
+  line-height: 1.3;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  animation: fadeInOut 2.4s ease-in-out;
+  z-index: 9999;
+  opacity: 0;
+  transform: translateY(20px);
+  text-align: center;
+}
+
+/* Toast animation */
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  90% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
 }
