@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import "./Carousel.css"; // This assumes Carousel.css is in the same folder as carousel.jsx
+import "./carousel.css"; // This assumes Carousel.css is in the same folder as carousel.jsx
 import image1 from "../assets/placard1.png";
 import image2 from "../assets/placard2.png";
 
