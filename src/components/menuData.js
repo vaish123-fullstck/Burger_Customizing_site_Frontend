@@ -10,12 +10,12 @@ import Sausageneggcheesebrrrgrrr from "../assets/breakfast/sausageeggcheesebrrrg
 import Sausagencheese from "../assets/breakfast/sausgnchs.png";
 
 /* Burgers */
-import BaconBrrrgrrr from "../assets/burgers/baconburger.png";
-import Bigbrrrgrrr from "../assets/burgers/bigbrrrgrrr.png";
-import Cheeseburger from "../assets/burgers/cheeseburger.png";
-import Classichambrgr from "../assets/burgers/classichambrgr.png";
-import Classicmelt from "../assets/burgers/clscmelt.png";
-import Doublecheeseburger from "../assets/burgers/doublecheeseburger.png";
+import BaconBrrrgrrr from "../assets/Burgers/baconburger.png";
+import Bigbrrrgrrr from "../assets/Burgers/bigbrrrgrrr.png";
+import Cheeseburger from "../assets/Burgers/cheeseburger.png";
+import Classichambrgr from "../assets/Burgers/classichambrgr.png";
+import Classicmelt from "../assets/Burgers/clscmelt.png";
+import Doublecheeseburger from "../assets/Burgers/doublecheeseburger.png";
 
 /* Beverages */
 import Bottlewater from "../assets/beverages/bottleswater.png";
